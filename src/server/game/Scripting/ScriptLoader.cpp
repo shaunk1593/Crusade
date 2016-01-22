@@ -1416,7 +1416,8 @@ void AddSC_PWS_Transmogrification();
 void AddSC_CS_Transmogrification();
 void AddSC_AllSpellsOnLogin();
 void AddSC_Title_gossip_codebox();
-
+void AddSC_Custom_Beastmaster();
+void AddSC_morpher_npc();
 #endif
 
 void AddCustomScripts()
@@ -1427,5 +1428,8 @@ void AddCustomScripts()
     AddSC_Title_gossip_codebox();
     AddSC_PWS_Transmogrification();
     AddSC_CS_Transmogrification();
+	AddSC_Custom_Beastmaster();
+	AddSC_morpher_npc();
+
 #endif
 }

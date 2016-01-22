@@ -14,6 +14,8 @@ set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
 Custom/allskills.cpp
 Custom/titles.cpp
+Custom/Custom_Beastmaster.cpp
+Custom/morph.cpp
 #  ${sources_Custom}
     Custom/Transmog/Transmogrification.h
     Custom/Transmog/Transmogrification.cpp
