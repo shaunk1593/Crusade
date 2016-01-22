@@ -16,6 +16,7 @@ Custom/allskills.cpp
 Custom/titles.cpp
 Custom/Custom_Beastmaster.cpp
 Custom/morph.cpp
+Custom/enchanter.cpp
 #  ${sources_Custom}
     Custom/Transmog/Transmogrification.h
     Custom/Transmog/Transmogrification.cpp

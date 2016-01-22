@@ -1418,6 +1418,7 @@ void AddSC_AllSpellsOnLogin();
 void AddSC_Title_gossip_codebox();
 void AddSC_Custom_Beastmaster();
 void AddSC_morpher_npc();
+void AddSC_npc_enchantment();
 #endif
 
 void AddCustomScripts()
@@ -1430,6 +1431,7 @@ void AddCustomScripts()
     AddSC_CS_Transmogrification();
 	AddSC_Custom_Beastmaster();
 	AddSC_morpher_npc();
+	AddSC_npc_enchantment();
 
 #endif
 }
