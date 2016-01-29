@@ -3328,7 +3328,8 @@ void SpellMgr::LoadSpellInfoCorrections()
                 spellInfo->Effects[EFFECT_0].BasePoints = 1;
                 break;
             case 59630: // Black Magic
-                spellInfo->Attributes |= SPELL_ATTR0_PASSIVE;
+			case 72968: // Precious's Ribbon
+				spellInfo->AttributesEx3 |= SPELL_ATTR3_DEATH_PERSISTENT;
                 break;
             case 17364: // Stormstrike
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
