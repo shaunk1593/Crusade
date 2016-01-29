@@ -3160,6 +3160,10 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 29809: // Desecration Arm - 36 instead of 37 - typo? :/
                 spellInfo->Effects[EFFECT_0].RadiusEntry = sSpellRadiusStore.LookupEntry(EFFECT_RADIUS_7_YARDS);
                 break;
+			case 14910: // Mind Melt should also affect Mind Flay
+            case 33371: 
+                spellInfo->Effects[EFFECT_0].SpellClassMask[2] |= 0x00000440;
+                break;
             // Master Shapeshifter: missing stance data for forms other than bear - bear version has correct data
             // To prevent aura staying on target after talent unlearned
             case 48420:
