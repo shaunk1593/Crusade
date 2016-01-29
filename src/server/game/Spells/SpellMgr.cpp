@@ -3331,6 +3331,9 @@ void SpellMgr::LoadSpellInfoCorrections()
 			case 72968: // Precious's Ribbon
 				spellInfo->AttributesEx3 |= SPELL_ATTR3_DEATH_PERSISTENT;
                 break;
+			case 44535: // Spirit Heal, abilities also have no cost
+				spellInfo->Effects[EFFECT_0].MiscValue = 127;
+				break;
             case 17364: // Stormstrike
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
                 break;
