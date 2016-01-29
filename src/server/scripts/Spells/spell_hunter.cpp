@@ -426,6 +426,39 @@ class spell_hun_masters_call : public SpellScriptLoader
                 return true;
             }
 
+			SpellCastResult CheckCast()
+            {
+                if (Player* caster = GetCaster()->ToPlayer())
+                {
+
+                    if (Pet* pet = caster->GetPet())
+                    {
+                        if (!pet->IsAlive())
+                        {
+                            return SPELL_FAILED_NO_PET;
+                        }
+
+                        if (pet->HasUnitState(UNIT_STATE_STUNNED) || caster->HasUnitState(UNIT_STATE_STUNNED))
+                        {
+                            return SPELL_FAILED_STUNNED;
+                        }
+
+                        if (!pet->IsWithinLOS(caster->GetPositionX(), caster->GetPositionY(), caster->GetPositionZ()))
+                        {
+                            return SPELL_FAILED_LINE_OF_SIGHT;
+                        }
+
+                        if (Unit* target = GetExplTargetUnit())
+                        {
+                           if (!pet->IsWithinLOS(target->GetPositionX(), target->GetPositionY(), target->GetPositionZ()))
+                                return SPELL_FAILED_LINE_OF_SIGHT;
+                        }
+                    }
+                }
+
+                return SPELL_CAST_OK;
+            }
+
             void HandleDummy(SpellEffIndex /*effIndex*/)
             {
                 if (Unit* ally = GetHitUnit())
@@ -434,7 +467,11 @@ class spell_hun_masters_call : public SpellScriptLoader
                         {
                             TriggerCastFlags castMask = TriggerCastFlags(TRIGGERED_FULL_MASK & ~TRIGGERED_IGNORE_CASTER_AURASTATE);
                             target->CastSpell(ally, GetEffectValue(), castMask);
-                            target->CastSpell(ally, GetSpellInfo()->Effects[EFFECT_0].CalcValue(), castMask);
+							target->CastSpell(ally, GetSpellInfo()->Effects[EFFECT_0].CalcValue(), castMask);
+							target->RemoveMovementImpairingAuras(); // remove already applied root and snare from pet
+							caster->RemoveMovementImpairingAuras(); // remove already applied root and snare from pet's owner
+							caster->CastSpell(ally, GetEffectValue(), castMask);
+							caster->CastSpell(ally, GetSpellInfo()->Effects[EFFECT_0].CalcValue(), castMask); // apply 4s root and snare immunity to pet's owner
                         }
             }
 
@@ -450,6 +487,7 @@ class spell_hun_masters_call : public SpellScriptLoader
 
             void Register() override
             {
+				OnCheckCast       += SpellCheckCastFn(spell_hun_masters_call_SpellScript::CheckCast);
                 OnEffectHitTarget += SpellEffectFn(spell_hun_masters_call_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
                 OnEffectHitTarget += SpellEffectFn(spell_hun_masters_call_SpellScript::HandleScriptEffect, EFFECT_1, SPELL_EFFECT_SCRIPT_EFFECT);
             }
