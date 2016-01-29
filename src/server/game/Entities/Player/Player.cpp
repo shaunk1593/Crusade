@@ -3503,11 +3503,17 @@ bool Player::AddSpell(uint32 spellId, bool active, bool learning, bool dependent
             if ((_spell_idx->second->AutolearnType == SKILL_LINE_ABILITY_LEARNED_ON_SKILL_LEARN && !HasSkill(pSkill->id)) || ((pSkill->id == SKILL_LOCKPICKING || pSkill->id == SKILL_RUNEFORGING) && _spell_idx->second->max_value == 0))
                 LearnDefaultSkill(pSkill->id, 0);
 
-            if (pSkill->id == SKILL_MOUNTS && !Has310Flyer(false))
-                for (uint8 i = 0; i < MAX_SPELL_EFFECTS; ++i)
-                    if (spellInfo->Effects[i].ApplyAuraName == SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED &&
-                        spellInfo->Effects[i].CalcValue() == 310)
-                        SetHas310Flyer(true);
+			if (pSkill->id == SKILL_MOUNTS && !Has310Flyer(false))
+			{
+				// Big Love Rocket & Invincible should also SetHas310Flyer true
+				if (spellInfo->Id == 71342 || spellInfo->Id == 72286)
+					SetHas310Flyer(true);
+
+				for (uint8 i = 0; i < MAX_SPELL_EFFECTS; ++i)
+					if (spellInfo->Effects[i].ApplyAuraName == SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED &&
+						spellInfo->Effects[i].CalcValue() == 310)
+						SetHas310Flyer(true);
+			}
         }
     }
 
