@@ -132,6 +132,19 @@ class boss_festergut : public CreatureScript
 
             void JustDied(Unit* /*killer*/) override
             {
+				Map::PlayerList const& players = instance->instance->GetPlayers();
+                if (!players.isEmpty())
+                {
+                    for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+                    {
+                        if (Player* player = itr->GetSource())
+                        if ((player->GetQuestStatus(QUEST_RESIDUE_RENDEZVOUS_10) == QUEST_STATUS_INCOMPLETE) || (player->GetQuestStatus(QUEST_RESIDUE_RENDEZVOUS_25) == QUEST_STATUS_INCOMPLETE))
+                                player->CastSpell(player, SPELL_ORANGE_BLIGHT_RESIDUE, true);
+                            else
+                                continue;
+                    }
+                }
+
                 _JustDied();
                 Talk(SAY_DEATH);
                 if (Creature* professor = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_PROFESSOR_PUTRICIDE)))

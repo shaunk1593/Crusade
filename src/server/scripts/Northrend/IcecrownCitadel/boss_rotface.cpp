@@ -135,6 +135,19 @@ class boss_rotface : public CreatureScript
 
             void JustDied(Unit* /*killer*/) override
             {
+                Map::PlayerList const& players = instance->instance->GetPlayers();
+                if (!players.isEmpty())
+                {
+                    for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+                    {
+                        if (Player* player = itr->GetSource())
+                        if ((player->GetQuestStatus(QUEST_RESIDUE_RENDEZVOUS_10) == QUEST_STATUS_INCOMPLETE) || (player->GetQuestStatus(QUEST_RESIDUE_RENDEZVOUS_25) == QUEST_STATUS_INCOMPLETE))
+                                player->CastSpell(player, SPELL_GREEN_BLIGHT_RESIDUE, true);
+                            else
+                                continue;
+                    }
+                }
+
                 instance->DoRemoveAurasDueToSpellOnPlayers(MUTATED_INFECTION);
                 _JustDied();
                 Talk(SAY_DEATH);
