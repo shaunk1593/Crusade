@@ -21,6 +21,7 @@ Custom/enchanter.cpp
     Custom/Transmog/Transmogrification.h
     Custom/Transmog/Transmogrification.cpp
     Custom/Transmog/Transmogrifier.cpp
+    Custom/ArenaSpectator/arena_spectator.cpp
 )
 
 message("  -> Prepared: Custom")

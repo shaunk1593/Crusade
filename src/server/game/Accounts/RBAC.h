@@ -697,6 +697,13 @@ enum RBACPermissions
     // 799 - 834 6.x only
     RBAC_PERM_COMMAND_DEBUG_LOADCELLS                        = 835,
 
+	//Arena Spectator
+	RBAC_PERM_COMMAND_SPECTATE								 = 1000,
+	RBAC_PERM_COMMAND_SPECTATE_PLAYER						 = 1001,
+	RBAC_PERM_COMMAND_SPECTATE_VIEW							 = 1002,
+	RBAC_PERM_COMMAND_SPECTATE_RESET						 = 1003,
+	RBAC_PERM_COMMAND_SPECTATE_LEAVE						 = 1004,
+
     // custom permissions 1000+
     RBAC_PERM_MAX
 };

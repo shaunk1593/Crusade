@@ -1419,6 +1419,7 @@ void AddSC_Title_gossip_codebox();
 void AddSC_Custom_Beastmaster();
 void AddSC_morpher_npc();
 void AddSC_npc_enchantment();
+void AddSC_arena_spectator_script();
 #endif
 
 void AddCustomScripts()
@@ -1432,6 +1433,7 @@ void AddCustomScripts()
 	AddSC_Custom_Beastmaster();
 	AddSC_morpher_npc();
 	AddSC_npc_enchantment();
+	AddSC_arena_spectator_script();
 
 #endif
 }
