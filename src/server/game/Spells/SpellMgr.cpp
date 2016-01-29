@@ -3164,6 +3164,9 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 33371: 
                 spellInfo->Effects[EFFECT_0].SpellClassMask[2] |= 0x00000440;
                 break;
+			case 17364: // Stormstrike
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+                break;
             // Master Shapeshifter: missing stance data for forms other than bear - bear version has correct data
             // To prevent aura staying on target after talent unlearned
             case 48420:
