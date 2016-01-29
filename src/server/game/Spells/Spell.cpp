@@ -5574,8 +5574,8 @@ SpellCastResult Spell::CheckCasterAuras() const
 
     // Glyph of Pain Suppression
 	if (m_spellInfo->SpellFamilyName == SPELLFAMILY_PRIEST && m_spellInfo->SpellIconID == 2178)
-		if (m_caster->HasAuraEffect(63248, 0))      // no SpellFamilyFlags or SpellIconID to identify this
-			mechanic_immune = 1 << MECHANIC_STUN;   // "immune" to stun only for this cast
+		if (m_caster->HasAura(63248))      // no SpellFamilyFlags or SpellIconID to identify this
+			usableInStun = true;
 
     // Check whether the cast should be prevented by any state you might have.
     SpellCastResult prevented_reason = SPELL_CAST_OK;

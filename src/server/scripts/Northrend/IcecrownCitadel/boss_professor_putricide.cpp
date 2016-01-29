@@ -234,6 +234,7 @@ class boss_professor_putricide : public CreatureScript
 
                 events.Reset();
                 summons.DespawnAll();
+				_abominationGUID.Clear();
                 SetPhase(PHASE_COMBAT_1);
                 _experimentState = EXPERIMENT_STATE_OOZE;
                 me->SetReactState(REACT_DEFENSIVE);
@@ -333,6 +334,7 @@ class boss_professor_putricide : public CreatureScript
                         return;
                     case NPC_MUTATED_ABOMINATION_10:
                     case NPC_MUTATED_ABOMINATION_25:
+						_abominationGUID = summon->GetGUID();
                         return;
                     default:
                         break;
@@ -624,6 +626,8 @@ class boss_professor_putricide : public CreatureScript
                             DoCastAOE(SPELL_TEAR_GAS_CANCEL);
                             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_GAS_VARIABLE);
                             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_OOZE_VARIABLE);
+							if (Creature* abomination = ObjectAccessor::GetCreature(*me, _abominationGUID))
+								abomination->RemoveAurasDueToSpell(71615);
                             break;
                         case EVENT_MALLEABLE_GOO:
                             if (Is25ManRaid())
@@ -702,6 +706,7 @@ class boss_professor_putricide : public CreatureScript
                 events.SetPhase(newPhase);
             }
 
+			ObjectGuid _abominationGUID;
             ObjectGuid _oozeFloodDummyGUIDs[4];
             Phases _phase;          // external of EventMap because event phase gets reset on evade
             float const _baseSpeed;
